@@ -1,0 +1,585 @@
+<!doctype html>
+<!--
+Material Design Lite
+Copyright 2015 Google Inc. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+https://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Crawlers</title>
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+    <link rel="shortcut icon" href="images/favicon.png">
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+    <style>
+    .ir_card{
+      min-height: 100px;
+    }
+
+    .ir-chip{
+      width: 100px;
+    }
+
+
+
+    .ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul.pagination li {display: inline;}
+
+    ul.pagination li a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+    }
+
+    ul.pagination li a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+
+    #container{
+
+      height: 100px;
+      width: 100%;
+    }
+
+    .mdl-layout__header-row{
+      height: 100px;
+
+    }
+
+
+
+
+
+
+
+
+
+
+div.twitter-tweet-rendered p.entry-title {
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+    padding: 5px !important;
+    background: #eee !important;
+    max-width: 300px !important;
+}
+
+div.twitter-tweet-rendered p.entry-title a.link {
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+}
+
+div.twitter-tweet-rendered div.twt-border {
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+div.twitter-tweet-rendered iframe.twt-follow-button { display: none !important; }
+
+div.twitter-tweet-rendered div.footer ul.twt-actions {display: none !important;}
+
+div.twitter-tweet-rendered div.footer a.view-details {
+    display:block !important;
+    width: 120px !important;
+    margin: 5px 0 !important;
+    padding: 7px 0 !important;
+    background: #000 !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    border-radius: 13px !important;
+    text-align: center !important;
+    box-shadow: -1px -1px 2px #555 !important;
+}
+    
+div.twitter-tweet-rendered div.footer a.view-details span {
+    font: 14px Georgia, serif !important;
+    color: #fff !important;
+}
+
+
+.mdl-card__supporting-text{
+  padding: 0px;
+}
+
+
+
+#co-occourences{
+
+  height: 70px;
+}
+
+
+
+
+
+
+
+
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+    </style>
+
+  <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+
+
+
+color_map = {
+"hi" : "#FFCCCC",
+"en" : "#FFE6CC",
+"ja" : "#FFFFCC",
+"es" : "#EEFFCC",
+"it" : "#00FFD5",
+"de" : "#99DDFF",
+"ur" : "#DDCCFF",          
+"fr" : "#FF99DD",
+"ru" : "#2299DD",
+"ar" : "#1199DD"
+
+};
+
+  co_oc = {"\u0646\u06d2": {"count": 440, "lang": "ur", "co_oc": [{"count": 659, "lang": "ur", "cooccuredTerm": "\u0679\u0631\u0645\u067e"}, {"count": 364, "lang": "ur", "cooccuredTerm": "\u0688\u0648\u0646\u0644\u0688"}, {"count": 254, "lang": "ur", "cooccuredTerm": "\u0645\u06cc\u06ba"}, {"count": 215, "lang": "ur", "cooccuredTerm": "\u0633\u06d2"}, {"count": 211, "lang": "ur", "cooccuredTerm": "\u06a9\u0648"}, {"count": 209, "lang": "ur", "cooccuredTerm": "\u06a9\u0627"}, {"count": 126, "lang": "ur", "cooccuredTerm": "\u0646\u06c1\u06cc\u06ba"}, {"count": 114, "lang": "ur", "cooccuredTerm": "\u0646\u0648\u0627\u0632\u0634\u0631\u06cc\u0641"}, {"count": 96, "lang": "ur", "cooccuredTerm": "\u0646\u0648\u0627\u0632"}, {"count": 96, "lang": "ur", "cooccuredTerm": "\u062e\u0627\u0631\u062c\u06c1"}]}, "trump": {"count": 17375, "lang": "en", "co_oc": [{"count": 3799, "lang": "en", "cooccuredTerm": "#trump"}, {"count": 2046, "lang": "en", "cooccuredTerm": "Trump"}, {"count": 1838, "lang": "en", "cooccuredTerm": "like"}, {"count": 1822, "lang": "en", "cooccuredTerm": "@realDonaldTrump"}, {"count": 1565, "lang": "en", "cooccuredTerm": "Donald"}, {"count": 1366, "lang": "en", "cooccuredTerm": "just"}, {"count": 1196, "lang": "en", "cooccuredTerm": "&amp;"}, {"count": 1148, "lang": "en", "cooccuredTerm": "donald"}, {"count": 1016, "lang": "en", "cooccuredTerm": "can"}, {"count": 1007, "lang": "en", "cooccuredTerm": "people"}]}, "\u0633\u06d2": {"count": 635, "lang": "ur", "co_oc": [{"count": 538, "lang": "ur", "cooccuredTerm": "\u0679\u0631\u0645\u067e"}, {"count": 364, "lang": "ur", "cooccuredTerm": "\u0688\u0648\u0646\u0644\u0688"}, {"count": 206, "lang": "ur", "cooccuredTerm": "\u06a9\u0627"}, {"count": 175, "lang": "ur", "cooccuredTerm": "\u0646\u06d2"}, {"count": 137, "lang": "ur", "cooccuredTerm": "\u0635\u062f\u0631"}, {"count": 131, "lang": "ur", "cooccuredTerm": "\u0627\u0645\u0631\u06cc\u06a9\u06cc"}, {"count": 113, "lang": "ur", "cooccuredTerm": "\u0645\u06cc\u06ba"}, {"count": 103, "lang": "ur", "cooccuredTerm": "\u067e\u0627\u06a9\u0633\u062a\u0627\u0646"}, {"count": 101, "lang": "ur", "cooccuredTerm": "\u06af\u0641\u062a\u06af\u0648"}, {"count": 87, "lang": "ur", "cooccuredTerm": "\u0634\u0631\u06cc\u0641"}]}, "Trump,": {"count": 545, "lang": "it", "co_oc": [{"count": 89, "lang": "it", "cooccuredTerm": "per"}, {"count": 73, "lang": "it", "cooccuredTerm": "non"}, {"count": 68, "lang": "it", "cooccuredTerm": "dopo"}, {"count": 65, "lang": "it", "cooccuredTerm": "#Trump,"}, {"count": 43, "lang": "it", "cooccuredTerm": "presidente"}, {"count": 39, "lang": "it", "cooccuredTerm": "i"}, {"count": 39, "lang": "it", "cooccuredTerm": "Donald"}, {"count": 36, "lang": "it", "cooccuredTerm": "Taiwan"}, {"count": 35, "lang": "it", "cooccuredTerm": "Dopo"}, {"count": 33, "lang": "it", "cooccuredTerm": "Brexit"}]}, "Chine": {"count": 370, "lang": "fr", "co_oc": [{"count": 374, "lang": "fr", "cooccuredTerm": "Trump"}, {"count": 230, "lang": "fr", "cooccuredTerm": "risque"}, {"count": 193, "lang": "fr", "cooccuredTerm": "crise"}, {"count": 185, "lang": "fr", "cooccuredTerm": "pr\u00e9sidente"}, {"count": 168, "lang": "fr", "cooccuredTerm": "Ta\u00efwan"}, {"count": 153, "lang": "fr", "cooccuredTerm": "une"}, {"count": 109, "lang": "fr", "cooccuredTerm": "un"}, {"count": 100, "lang": "fr", "cooccuredTerm": "apr\u00e8s"}, {"count": 94, "lang": "fr", "cooccuredTerm": "appel"}, {"count": 57, "lang": "fr", "cooccuredTerm": "critique"}]}, "\u062a\u0631\u0645\u0628": {"count": 1947, "lang": "ar", "co_oc": [{"count": 1144, "lang": "ar", "cooccuredTerm": "\u0631\u0648\u0633\u064a\u0627"}, {"count": 1138, "lang": "ar", "cooccuredTerm": "\u0623\u0646"}, {"count": 1130, "lang": "ar", "cooccuredTerm": "\u062a\u0643\u0648\u0646"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0644\u062f\u064a\u0647"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u062d\u062a\u0631\u0645"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0648\u0627\u0644\u0645\u0639\u0627\u064a\u064a\u0631"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0627\u0644\u0625\u0631\u0627\u062f\u0629"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0623\u0631\u062c\u0648"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0648\u062c\u0647"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0642\u064a\u0645\u0646\u0627"}]}, "\u0679\u0631\u0645\u067e": {"count": 1383, "lang": "ur", "co_oc": [{"count": 831, "lang": "ur", "cooccuredTerm": "\u0688\u0648\u0646\u0644\u0688"}, {"count": 625, "lang": "ur", "cooccuredTerm": "\u0633\u06d2"}, {"count": 460, "lang": "ur", "cooccuredTerm": "\u06a9\u0627"}, {"count": 435, "lang": "ur", "cooccuredTerm": "\u0646\u06d2"}, {"count": 413, "lang": "ur", "cooccuredTerm": "\u0645\u06cc\u06ba"}, {"count": 333, "lang": "ur", "cooccuredTerm": "\u06a9\u0648"}, {"count": 274, "lang": "ur", "cooccuredTerm": "\u0635\u062f\u0631"}, {"count": 220, "lang": "ur", "cooccuredTerm": "\u0646\u0648\u0627\u0632"}, {"count": 196, "lang": "ur", "cooccuredTerm": "\u0646\u06c1\u06cc\u06ba"}, {"count": 182, "lang": "ur", "cooccuredTerm": "\u0627\u0645\u0631\u06cc\u06a9\u06cc"}]}, "\u041d\u044c\u044e-\u0419\u043e\u0440\u043a\u0430": {"count": 301, "lang": "ru", "co_oc": [{"count": 292, "lang": "ru", "cooccuredTerm": "\u0422\u0440\u0430\u043c\u043f"}, {"count": 238, "lang": "ru", "cooccuredTerm": "\u0416\u0438\u0442\u0435\u043b\u0438"}, {"count": 131, "lang": "ru", "cooccuredTerm": "\u041c\u0435\u043b\u0430\u043d\u044c\u0438"}, {"count": 118, "lang": "ru", "cooccuredTerm": "\u0433\u043e\u0440\u043e\u0434\u0430"}, {"count": 113, "lang": "ru", "cooccuredTerm": "\u0442\u0440\u0435\u0431\u0443\u044e\u0442"}, {"count": 94, "lang": "ru", "cooccuredTerm": "\u0433\u043e\u0440\u043e\u0434"}, {"count": 82, "lang": "ru", "cooccuredTerm": "\u0442\u0440\u0435\u0431\u0443\u044e\u0442,"}, {"count": 67, "lang": "ru", "cooccuredTerm": "\u0443\u0435\u0445\u0430\u0442\u044c"}, {"count": 62, "lang": "ru", "cooccuredTerm": "\u043f\u043e\u043a\u0438\u043d\u0443\u0442\u044c"}, {"count": 60, "lang": "ru", "cooccuredTerm": "\u041c\u0435\u043b\u0430\u043d\u044c\u044e"}]}, "\u06a9\u0627": {"count": 471, "lang": "ur", "co_oc": [{"count": 626, "lang": "ur", "cooccuredTerm": "\u0679\u0631\u0645\u067e"}, {"count": 363, "lang": "ur", "cooccuredTerm": "\u0688\u0648\u0646\u0644\u0688"}, {"count": 296, "lang": "ur", "cooccuredTerm": "\u0633\u06d2"}, {"count": 202, "lang": "ur", "cooccuredTerm": "\u0645\u06cc\u06ba"}, {"count": 184, "lang": "ur", "cooccuredTerm": "\u0646\u06d2"}, {"count": 176, "lang": "ur", "cooccuredTerm": "\u06a9\u0648"}, {"count": 119, "lang": "ur", "cooccuredTerm": "\u0646\u06c1\u06cc\u06ba"}, {"count": 104, "lang": "ur", "cooccuredTerm": "\u0635\u062f\u0631"}, {"count": 100, "lang": "ur", "cooccuredTerm": "\u0646\u0648\u0627\u0632\u0634\u0631\u06cc\u0641"}, {"count": 94, "lang": "ur", "cooccuredTerm": "\u06a9\u0627\u0644"}]}, "\u0414\u043e\u043d\u0430\u043b\u044c\u0434": {"count": 778, "lang": "ru", "co_oc": [{"count": 631, "lang": "ru", "cooccuredTerm": "\u0422\u0440\u0430\u043c\u043f"}, {"count": 425, "lang": "ru", "cooccuredTerm": "\u0421\u0428\u0410"}, {"count": 200, "lang": "ru", "cooccuredTerm": "\u0422\u0440\u0430\u043c\u043f:"}, {"count": 173, "lang": "ru", "cooccuredTerm": "\u043f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442"}, {"count": 124, "lang": "ru", "cooccuredTerm": "\u0441\u0432\u0435\u0440\u0433\u0430\u0442\u044c"}, {"count": 120, "lang": "ru", "cooccuredTerm": "\u0440\u0435\u0436\u0438\u043c\u044b"}, {"count": 116, "lang": "ru", "cooccuredTerm": "\u0418\u0437\u0431\u0440\u0430\u043d\u043d\u044b\u0439"}, {"count": 106, "lang": "ru", "cooccuredTerm": "\u043d\u0430\u043c\u0435\u0440\u0435\u043d\u044b"}, {"count": 106, "lang": "ru", "cooccuredTerm": "\u0441\u0442\u0440\u0430\u043d\u0430\u0445"}, {"count": 86, "lang": "ru", "cooccuredTerm": "\u0432\u0435\u0447\u0435\u0440\u0438\u043d\u043a\u0443"}]}, "Trump's": {"count": 30032, "lang": "en", "co_oc": [{"count": 4878, "lang": "en", "cooccuredTerm": "Donald"}, {"count": 3188, "lang": "en", "cooccuredTerm": "Taiwan"}, {"count": 3172, "lang": "en", "cooccuredTerm": "call"}, {"count": 1843, "lang": "en", "cooccuredTerm": "China"}, {"count": 1617, "lang": "en", "cooccuredTerm": "Carrier"}, {"count": 1480, "lang": "en", "cooccuredTerm": "Twitter"}, {"count": 1432, "lang": "en", "cooccuredTerm": "phone"}, {"count": 1202, "lang": "en", "cooccuredTerm": "&amp;"}, {"count": 1186, "lang": "en", "cooccuredTerm": "US"}, {"count": 1087, "lang": "en", "cooccuredTerm": "Trump"}]}, "\u0631\u0648\u0633\u064a\u0627": {"count": 1146, "lang": "ar", "co_oc": [{"count": 1144, "lang": "ar", "cooccuredTerm": "\u062a\u0631\u0645\u0628"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0644\u062f\u064a\u0647"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0627\u0644\u0625\u0631\u0627\u062f\u0629"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0623\u0631\u062c\u0648"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u062d\u062a\u0631\u0645"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0642\u064a\u0645\u0646\u0627"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0623\u0646"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0648\u0627\u0644\u0645\u0639\u0627\u064a\u064a\u0631"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0644\u0644\u0648\u0642\u0648\u0641"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u0643\u0648\u0646"}]}, "Donald": {"count": 587, "lang": "fr", "co_oc": [{"count": 38158, "lang": "en", "cooccuredTerm": "Trump"}, {"count": 16150, "lang": "en", "cooccuredTerm": "@realDonaldTrump"}, {"count": 5375, "lang": "en", "cooccuredTerm": "Trump's"}, {"count": 2834, "lang": "en", "cooccuredTerm": "Taiwan"}, {"count": 2701, "lang": "en", "cooccuredTerm": "China"}, {"count": 2477, "lang": "en", "cooccuredTerm": "President"}, {"count": 2405, "lang": "en", "cooccuredTerm": "Trump\u2019s"}, {"count": 2147, "lang": "en", "cooccuredTerm": "call"}, {"count": 2040, "lang": "en", "cooccuredTerm": "&amp;"}, {"count": 1959, "lang": "en", "cooccuredTerm": "Twitter"}, {"count": 2647, "lang": "es", "cooccuredTerm": "Trump"}, {"count": 416, "lang": "es", "cooccuredTerm": "se"}, {"count": 374, "lang": "es", "cooccuredTerm": "fiscal"}, {"count": 312, "lang": "es", "cooccuredTerm": "no"}, {"count": 248, "lang": "es", "cooccuredTerm": "reuni\u00f3"}, {"count": 232, "lang": "es", "cooccuredTerm": "A"}, {"count": 225, "lang": "es", "cooccuredTerm": "El"}, {"count": 225, "lang": "es", "cooccuredTerm": "La"}, {"count": 223, "lang": "es", "cooccuredTerm": "narcosobrinos"}, {"count": 214, "lang": "es", "cooccuredTerm": "al"}, {"count": 212, "lang": "de", "cooccuredTerm": "Trump"}, {"count": 76, "lang": "de", "cooccuredTerm": "neue"}, {"count": 59, "lang": "de", "cooccuredTerm": "gegen"}, {"count": 52, "lang": "de", "cooccuredTerm": "l\u00e4sst"}, {"count": 52, "lang": "de", "cooccuredTerm": "Sanktionen"}, {"count": 51, "lang": "de", "cooccuredTerm": "pr\u00fcfen"}, {"count": 51, "lang": "de", "cooccuredTerm": "Iran"}, {"count": 32, "lang": "de", "cooccuredTerm": "hat"}, {"count": 31, "lang": "de", "cooccuredTerm": "Trump:"}, {"count": 23, "lang": "de", "cooccuredTerm": "Pennsylvania"}, {"count": 506, "lang": "fr", "cooccuredTerm": "Trump"}, {"count": 75, "lang": "fr", "cooccuredTerm": "via"}, {"count": 68, "lang": "fr", "cooccuredTerm": ":"}, {"count": 66, "lang": "fr", "cooccuredTerm": "une"}, {"count": 60, "lang": "fr", "cooccuredTerm": "m\u00e8re"}, {"count": 56, "lang": "fr", "cooccuredTerm": "un"}, {"count": 55, "lang": "fr", "cooccuredTerm": "contre"}, {"count": 54, "lang": "fr", "cooccuredTerm": "Ta\u00efwan"}, {"count": 52, "lang": "fr", "cooccuredTerm": "l\u2019aval"}, {"count": 52, "lang": "fr", "cooccuredTerm": "@realDonaldTrump"}]}, "per": {"count": 1083, "lang": "it", "co_oc": [{"count": 702, "lang": "it", "cooccuredTerm": "Trump"}, {"count": 180, "lang": "it", "cooccuredTerm": "non"}, {"count": 180, "lang": "it", "cooccuredTerm": "#Trump"}, {"count": 178, "lang": "it", "cooccuredTerm": "gli"}, {"count": 149, "lang": "it", "cooccuredTerm": "Trump:"}, {"count": 123, "lang": "it", "cooccuredTerm": "affari"}, {"count": 111, "lang": "it", "cooccuredTerm": "i"}, {"count": 107, "lang": "it", "cooccuredTerm": "Usa,"}, {"count": 104, "lang": "it", "cooccuredTerm": "aziende"}, {"count": 103, "lang": "it", "cooccuredTerm": "come"}]}, "\uff03anipoke": {"count": 148, "lang": "ja", "co_oc": [{"count": 21, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u3000\uff03anipoke"}, {"count": 13, "lang": "ja", "cooccuredTerm": "\u7530\u7aef\u3067\u30d0\u30bf\u30d0\u30bf\u3000\uff03anipoke"}, {"count": 13, "lang": "ja", "cooccuredTerm": "#RT\u3057\u3066\u304f\u308c\u305f\u4eba\u5168\u54e1\u30d5\u30a9\u30ed\u30fc\u3059\u308b\u3000\uff03anipoke"}, {"count": 12, "lang": "ja", "cooccuredTerm": "\u30cb\u30b3\u30cb\u30b3\uff03anipoke"}, {"count": 11, "lang": "ja", "cooccuredTerm": "\u30b9\u30dd\u30fc\u30c4\u3000\uff03anipoke"}, {"count": 9, "lang": "ja", "cooccuredTerm": "\u76f8\u4e92\u30d5\u30a9\u30ed\u30fc\u3000\uff03anipoke"}, {"count": 9, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7"}, {"count": 8, "lang": "ja", "cooccuredTerm": "\u653f\u6cbb\uff03anipoke"}, {"count": 8, "lang": "ja", "cooccuredTerm": "\u30dd\u30b1\u30e2\u30f3\u3000\uff03anipoke"}, {"count": 7, "lang": "ja", "cooccuredTerm": "\u661f\u91ce\u6e90"}]}, "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7": {"count": 122, "lang": "ja", "co_oc": [{"count": 42, "lang": "ja", "cooccuredTerm": "\u7c73\u56fd\u3068\u65ad\u4ea4\u4ee5\u6765\u521d\u3081\u3066"}, {"count": 34, "lang": "ja", "cooccuredTerm": "\u671d\u65e5\u65b0\u805e"}, {"count": 33, "lang": "ja", "cooccuredTerm": "\u30ed\u30a4\u30bf\u30fc"}, {"count": 22, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7\u3000\u5bfe\u4e2d\u95a2\u4fc2\u306b\u5f71\u97ff\u3082"}, {"count": 20, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7\u3000\u7c73\u56fd\u3068\u65ad\u4ea4\u4ee5\u6765\u521d\u3081\u3066\uff1a\u671d\u65e5\u65b0\u805e\u30c7\u30b8\u30bf\u30eb"}, {"count": 18, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7\u3000\u7c73\u56fd\u3068\u65ad\u4ea4\u4ee5\u6765\u521d\u3081\u3066"}, {"count": 14, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7\u3000\u65ad\u4ea4\u4ee5\u6765\u521d\u3081\u3066"}, {"count": 10, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7\u2026\u4e2d\u56fd\u306f\u53cd\u767a\u304b"}, {"count": 10, "lang": "ja", "cooccuredTerm": "[\u56fd\u969b]"}, {"count": 8, "lang": "ja", "cooccuredTerm": "#\u30cb\u30e5\u30fc\u30b9"}]}, "China": {"count": 1877, "lang": "es", "co_oc": [{"count": 2350, "lang": "es", "cooccuredTerm": "Trump"}, {"count": 1248, "lang": "es", "cooccuredTerm": "presidenta"}, {"count": 1241, "lang": "es", "cooccuredTerm": "Taiw\u00e1n"}, {"count": 510, "lang": "es", "cooccuredTerm": "conversaci\u00f3n"}, {"count": 483, "lang": "es", "cooccuredTerm": "di\u00e1logo"}, {"count": 367, "lang": "es", "cooccuredTerm": "China?"}, {"count": 365, "lang": "es", "cooccuredTerm": "dir\u00e1"}, {"count": 365, "lang": "es", "cooccuredTerm": "\u00bfQu\u00e9"}, {"count": 365, "lang": "es", "cooccuredTerm": "inicia"}, {"count": 282, "lang": "es", "cooccuredTerm": "As\u00ed"}]}, "Taiwan": {"count": 166, "lang": "de", "co_oc": [{"count": 293, "lang": "de", "cooccuredTerm": "Trump"}, {"count": 227, "lang": "de", "cooccuredTerm": "telefoniert"}, {"count": 109, "lang": "de", "cooccuredTerm": "China"}, {"count": 93, "lang": "de", "cooccuredTerm": "riskiert"}, {"count": 78, "lang": "de", "cooccuredTerm": "Taiwans"}, {"count": 61, "lang": "de", "cooccuredTerm": "Pr\u00e4sidentin"}, {"count": 54, "lang": "de", "cooccuredTerm": "Zorn"}, {"count": 54, "lang": "de", "cooccuredTerm": "ONLINE"}, {"count": 53, "lang": "de", "cooccuredTerm": "ZEIT"}, {"count": 51, "lang": "de", "cooccuredTerm": "Chinas"}]}, "\u062a\u0643\u0648\u0646": {"count": 1130, "lang": "ar", "co_oc": [{"count": 1129, "lang": "ar", "cooccuredTerm": "\u0623\u0646"}, {"count": 1129, "lang": "ar", "cooccuredTerm": "\u062a\u0631\u0645\u0628"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0644\u062f\u064a\u0647"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0627\u0644\u0625\u0631\u0627\u062f\u0629"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0623\u0631\u062c\u0648"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u062d\u062a\u0631\u0645"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0642\u064a\u0645\u0646\u0627"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0648\u0627\u0644\u0645\u0639\u0627\u064a\u064a\u0631"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0644\u0644\u0648\u0642\u0648\u0641"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0631\u0648\u0633\u064a\u0627"}]}, "\u0688\u0648\u0646\u0644\u0688": {"count": 847, "lang": "ur", "co_oc": [{"count": 921, "lang": "ur", "cooccuredTerm": "\u0679\u0631\u0645\u067e"}, {"count": 486, "lang": "ur", "cooccuredTerm": "\u0633\u06d2"}, {"count": 298, "lang": "ur", "cooccuredTerm": "\u06a9\u0627"}, {"count": 298, "lang": "ur", "cooccuredTerm": "\u0646\u06d2"}, {"count": 292, "lang": "ur", "cooccuredTerm": "\u0645\u06cc\u06ba"}, {"count": 253, "lang": "ur", "cooccuredTerm": "\u06a9\u0648"}, {"count": 229, "lang": "ur", "cooccuredTerm": "\u0635\u062f\u0631"}, {"count": 134, "lang": "ur", "cooccuredTerm": "\u0646\u06c1\u06cc\u06ba"}, {"count": 128, "lang": "ur", "cooccuredTerm": "\u0634\u0631\u06cc\u0641"}, {"count": 125, "lang": "ur", "cooccuredTerm": "\u067e\u0627\u06a9\u0633\u062a\u0627\u0646"}]}, "non": {"count": 764, "lang": "it", "co_oc": [{"count": 309, "lang": "it", "cooccuredTerm": "Trump"}, {"count": 102, "lang": "it", "cooccuredTerm": "per"}, {"count": 90, "lang": "it", "cooccuredTerm": "si"}, {"count": 83, "lang": "it", "cooccuredTerm": "i"}, {"count": 77, "lang": "it", "cooccuredTerm": "#Trump"}, {"count": 72, "lang": "it", "cooccuredTerm": "come"}, {"count": 58, "lang": "it", "cooccuredTerm": "pi\u00f9"}, {"count": 54, "lang": "it", "cooccuredTerm": "Trump,"}, {"count": 51, "lang": "it", "cooccuredTerm": "se"}, {"count": 49, "lang": "it", "cooccuredTerm": "gli"}]}, "\u0422\u0430\u0439\u0432\u0430\u043d\u044f": {"count": 352, "lang": "ru", "co_oc": [{"count": 418, "lang": "ru", "cooccuredTerm": "\u0422\u0440\u0430\u043c\u043f"}, {"count": 183, "lang": "ru", "cooccuredTerm": "\u0430\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u0438"}, {"count": 166, "lang": "ru", "cooccuredTerm": "\u043f\u0440\u043e\u043a\u043e\u043c\u043c\u0435\u043d\u0442\u0438\u0440\u043e\u0432\u0430\u043b"}, {"count": 166, "lang": "ru", "cooccuredTerm": "\u0437\u0432\u043e\u043d\u043e\u043a"}, {"count": 154, "lang": "ru", "cooccuredTerm": "\u0433\u043b\u0430\u0432\u044b"}, {"count": 93, "lang": "ru", "cooccuredTerm": "\u0433\u043b\u0430\u0432\u043e\u0439"}, {"count": 72, "lang": "ru", "cooccuredTerm": "\u0440\u0430\u0437\u0433\u043e\u0432\u043e\u0440"}, {"count": 72, "lang": "ru", "cooccuredTerm": "\u043f\u043e\u0433\u043e\u0432\u043e\u0440\u0438\u043b"}, {"count": 63, "lang": "ru", "cooccuredTerm": "\u0414\u043e\u043d\u0430\u043b\u044c\u0434"}, {"count": 62, "lang": "ru", "cooccuredTerm": "\u043f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442\u043e\u043c"}]}, "\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71": {"count": 123, "lang": "ja", "co_oc": [{"count": 122, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7"}, {"count": 122, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f"}, {"count": 64, "lang": "ja", "cooccuredTerm": "\u30ed\u30a4\u30bf\u30fc"}, {"count": 58, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6b21\u671f\u7c73\u5927\u7d71\u9818\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7"}, {"count": 47, "lang": "ja", "cooccuredTerm": "\u4e2d\u56fd\u304c\u53cd\u767a\u3059\u308b\u6050\u308c"}, {"count": 46, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6b21\u671f\u7c73\u5927\u7d71\u9818\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7\uff1d\u653f\u6a29\u79fb\u884c\u30c1\u30fc\u30e0"}, {"count": 42, "lang": "ja", "cooccuredTerm": "\u7c73\u56fd\u3068\u65ad\u4ea4\u4ee5\u6765\u521d\u3081\u3066"}, {"count": 34, "lang": "ja", "cooccuredTerm": "\u671d\u65e5\u65b0\u805e"}, {"count": 28, "lang": "ja", "cooccuredTerm": "Yahoo!\u30cb\u30e5\u30fc\u30b9"}, {"count": 27, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u5354\u8b70\u3000\u65ad\u4ea4\u4ee5\u6765\u521d\u3000\u3000\uff1a\u65e5\u672c\u7d4c\u6e08\u65b0\u805e"}]}, "\u0422\u0440\u0430\u043c\u043f": {"count": 2318, "lang": "ru", "co_oc": [{"count": 775, "lang": "ru", "cooccuredTerm": "\u0414\u043e\u043d\u0430\u043b\u044c\u0434"}, {"count": 505, "lang": "ru", "cooccuredTerm": "\u0421\u0428\u0410"}, {"count": 348, "lang": "ru", "cooccuredTerm": "\u0422\u0430\u0439\u0432\u0430\u043d\u044f"}, {"count": 300, "lang": "ru", "cooccuredTerm": "\u041d\u044c\u044e-\u0419\u043e\u0440\u043a\u0430"}, {"count": 238, "lang": "ru", "cooccuredTerm": "\u0416\u0438\u0442\u0435\u043b\u0438"}, {"count": 202, "lang": "ru", "cooccuredTerm": "\u0422\u0440\u0430\u043c\u043f:"}, {"count": 189, "lang": "ru", "cooccuredTerm": "\u041c\u0435\u043b\u0430\u043d\u044c\u0438"}, {"count": 188, "lang": "ru", "cooccuredTerm": "\u043f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442"}, {"count": 187, "lang": "ru", "cooccuredTerm": "\u0430\u0434\u043c\u0438\u043d\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u0438"}, {"count": 177, "lang": "ru", "cooccuredTerm": "\u0433\u043b\u0430\u0432\u044b"}]}, "&amp;": {"count": 18590, "lang": "en", "co_oc": [{"count": 8429, "lang": "en", "cooccuredTerm": "Trump"}, {"count": 1068, "lang": "en", "cooccuredTerm": "Trump's"}, {"count": 956, "lang": "en", "cooccuredTerm": "@realDonaldTrump"}, {"count": 955, "lang": "en", "cooccuredTerm": "2"}, {"count": 883, "lang": "en", "cooccuredTerm": "#Trump"}, {"count": 840, "lang": "en", "cooccuredTerm": "like"}, {"count": 789, "lang": "en", "cooccuredTerm": "Donald"}, {"count": 694, "lang": "en", "cooccuredTerm": "trump"}, {"count": 682, "lang": "en", "cooccuredTerm": "TRUMP"}, {"count": 649, "lang": "en", "cooccuredTerm": "Obama"}]}, "ha": {"count": 61, "lang": "hi", "co_oc": [{"count": 28, "lang": "hi", "cooccuredTerm": "Trump"}, {"count": 16, "lang": "hi", "cooccuredTerm": "\u091f\u094d\u0930\u092e\u094d\u092a"}, {"count": 13, "lang": "hi", "cooccuredTerm": "ki"}, {"count": 12, "lang": "hi", "cooccuredTerm": "Ka"}, {"count": 12, "lang": "hi", "cooccuredTerm": "\u0921\u094b\u0928\u093e\u0932\u094d\u0921"}, {"count": 9, "lang": "hi", "cooccuredTerm": "\u091f\u094d\u0930\u0902\u092a"}, {"count": 9, "lang": "hi", "cooccuredTerm": "Donald"}, {"count": 9, "lang": "hi", "cooccuredTerm": "America"}, {"count": 8, "lang": "hi", "cooccuredTerm": "hai"}, {"count": 8, "lang": "hi", "cooccuredTerm": "Tariq"}]}, "\u0644\u0644\u0648\u0642\u0648\u0641": {"count": 1128, "lang": "ar", "co_oc": [{"count": 1128, "lang": "ar", "cooccuredTerm": "\u0623\u0646"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0644\u062f\u064a\u0647"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0648\u0627\u0644\u0645\u0639\u0627\u064a\u064a\u0631"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0627\u0644\u0625\u0631\u0627\u062f\u0629"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0631\u0648\u0633\u064a\u0627"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0623\u0631\u062c\u0648"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u0631\u0645\u0628"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u0643\u0648\u0646"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u062d\u062a\u0631\u0645"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0648\u062c\u0647"}]}, "une": {"count": 477, "lang": "fr", "co_oc": [{"count": 362, "lang": "fr", "cooccuredTerm": "Trump"}, {"count": 172, "lang": "fr", "cooccuredTerm": "pr\u00e9sidente"}, {"count": 168, "lang": "fr", "cooccuredTerm": "crise"}, {"count": 166, "lang": "fr", "cooccuredTerm": "Ta\u00efwan"}, {"count": 153, "lang": "fr", "cooccuredTerm": "Chine"}, {"count": 125, "lang": "fr", "cooccuredTerm": "risque"}, {"count": 114, "lang": "fr", "cooccuredTerm": "un"}, {"count": 104, "lang": "fr", "cooccuredTerm": "apr\u00e8s"}, {"count": 91, "lang": "fr", "cooccuredTerm": "appel"}, {"count": 71, "lang": "fr", "cooccuredTerm": "Donald"}]}, "Trump": {"count": 2224, "lang": "fr", "co_oc": [{"count": 42342, "lang": "en", "cooccuredTerm": "Donald"}, {"count": 30032, "lang": "en", "cooccuredTerm": "Trump's"}, {"count": 16150, "lang": "en", "cooccuredTerm": "@realDonaldTrump"}, {"count": 15518, "lang": "en", "cooccuredTerm": "Taiwan"}, {"count": 13497, "lang": "en", "cooccuredTerm": "&amp;"}, {"count": 12441, "lang": "en", "cooccuredTerm": "#Trump"}, {"count": 12366, "lang": "en", "cooccuredTerm": "Trump\u2019s"}, {"count": 11701, "lang": "en", "cooccuredTerm": "China"}, {"count": 11134, "lang": "en", "cooccuredTerm": "call"}, {"count": 9502, "lang": "en", "cooccuredTerm": "like"}, {"count": 67, "lang": "ja", "cooccuredTerm": "is"}, {"count": 63, "lang": "ja", "cooccuredTerm": "US"}, {"count": 55, "lang": "ja", "cooccuredTerm": "are"}, {"count": 55, "lang": "ja", "cooccuredTerm": "Donald"}, {"count": 51, "lang": "ja", "cooccuredTerm": "#\u81ea\u6cbb\u4f53"}, {"count": 51, "lang": "ja", "cooccuredTerm": "#unequal"}, {"count": 51, "lang": "ja", "cooccuredTerm": "#DEM"}, {"count": 51, "lang": "ja", "cooccuredTerm": "#Trump\u2192\u6575\u7c73\u8ecd\u64a4\u9000"}, {"count": 51, "lang": "ja", "cooccuredTerm": "#\u9632\u707d"}, {"count": 51, "lang": "ja", "cooccuredTerm": "#\u5ea7\u9593\u5e02"}, {"count": 2927, "lang": "es", "cooccuredTerm": "Donald"}, {"count": 1998, "lang": "es", "cooccuredTerm": "Taiw\u00e1n"}, {"count": 1865, "lang": "es", "cooccuredTerm": "China"}, {"count": 1793, "lang": "es", "cooccuredTerm": "presidenta"}, {"count": 1769, "lang": "es", "cooccuredTerm": "se"}, {"count": 1393, "lang": "es", "cooccuredTerm": "del"}, {"count": 1353, "lang": "es", "cooccuredTerm": "no"}, {"count": 1325, "lang": "es", "cooccuredTerm": "Trump,"}, {"count": 1256, "lang": "es", "cooccuredTerm": "El"}, {"count": 978, "lang": "es", "cooccuredTerm": "empresas"}, {"count": 270, "lang": "de", "cooccuredTerm": "Donald"}, {"count": 230, "lang": "de", "cooccuredTerm": "telefoniert"}, {"count": 227, "lang": "de", "cooccuredTerm": "#Trump"}, {"count": 162, "lang": "de", "cooccuredTerm": "Taiwan"}, {"count": 122, "lang": "de", "cooccuredTerm": "China"}, {"count": 117, "lang": "de", "cooccuredTerm": "hat"}, {"count": 105, "lang": "de", "cooccuredTerm": "riskiert"}, {"count": 100, "lang": "de", "cooccuredTerm": "gegen"}, {"count": 87, "lang": "de", "cooccuredTerm": "Neuausz\u00e4hlung"}, {"count": 85, "lang": "de", "cooccuredTerm": "neue"}, {"count": 955, "lang": "it", "cooccuredTerm": "per"}, {"count": 752, "lang": "it", "cooccuredTerm": "#Trump"}, {"count": 607, "lang": "it", "cooccuredTerm": "non"}, {"count": 545, "lang": "it", "cooccuredTerm": "Trump,"}, {"count": 508, "lang": "it", "cooccuredTerm": "Trump:"}, {"count": 444, "lang": "it", "cooccuredTerm": "i"}, {"count": 433, "lang": "it", "cooccuredTerm": "Donald"}, {"count": 356, "lang": "it", "cooccuredTerm": "come"}, {"count": 353, "lang": "it", "cooccuredTerm": "gli"}, {"count": 340, "lang": "it", "cooccuredTerm": "si"}, {"count": 574, "lang": "fr", "cooccuredTerm": "Donald"}, {"count": 417, "lang": "fr", "cooccuredTerm": "une"}, {"count": 382, "lang": "fr", "cooccuredTerm": "un"}, {"count": 359, "lang": "fr", "cooccuredTerm": "Chine"}, {"count": 326, "lang": "fr", "cooccuredTerm": "pr\u00e9sidente"}, {"count": 317, "lang": "fr", "cooccuredTerm": "via"}, {"count": 303, "lang": "fr", "cooccuredTerm": ":"}, {"count": 303, "lang": "fr", "cooccuredTerm": "Ta\u00efwan"}, {"count": 266, "lang": "fr", "cooccuredTerm": "#Trump"}, {"count": 247, "lang": "fr", "cooccuredTerm": "risque"}]}, "\u0921\u094b\u0928\u093e\u0932\u094d\u0921": {"count": 135, "lang": "hi", "co_oc": [{"count": 117, "lang": "hi", "cooccuredTerm": "\u091f\u094d\u0930\u092e\u094d\u092a"}, {"count": 21, "lang": "hi", "cooccuredTerm": "\u092a\u093e\u0915\u093f\u0938\u094d\u0924\u093e\u0928"}, {"count": 20, "lang": "hi", "cooccuredTerm": "\u0930\u093e\u0937\u094d\u091f\u094d\u0930\u092a\u0924\u093f"}, {"count": 19, "lang": "hi", "cooccuredTerm": "\u091c\u0940"}, {"count": 18, "lang": "hi", "cooccuredTerm": "\u092d\u0940"}, {"count": 17, "lang": "hi", "cooccuredTerm": "\u0905\u092e\u0947\u0930\u093f\u0915\u093e"}, {"count": 16, "lang": "hi", "cooccuredTerm": "\u091f\u094d\u0930\u0902\u092a"}, {"count": 15, "lang": "hi", "cooccuredTerm": "\u0939\u0948\u0964"}, {"count": 14, "lang": "hi", "cooccuredTerm": "\u0926\u0940"}, {"count": 13, "lang": "hi", "cooccuredTerm": "\u0926\u093f\u0915\u094d\u0915\u0924\u0947\u0902"}]}, "\u092e\u094b\u0926\u0940": {"count": 85, "lang": "hi", "co_oc": [{"count": 42, "lang": "hi", "cooccuredTerm": "\u091f\u094d\u0930\u092e\u094d\u092a"}, {"count": 36, "lang": "hi", "cooccuredTerm": "\u0928\u0930\u0947\u0902\u0926\u094d\u0930"}, {"count": 29, "lang": "hi", "cooccuredTerm": "\u0913\u092c\u093e\u092e\u093e"}, {"count": 26, "lang": "hi", "cooccuredTerm": "\u0915\u0928\u094d\u0939\u0948\u092f\u093e"}, {"count": 25, "lang": "hi", "cooccuredTerm": "\u091f\u094d\u0930\u0902\u092a"}, {"count": 24, "lang": "hi", "cooccuredTerm": "\u092a\u094d\u0930\u0927\u093e\u0928\u092e\u0902\u0924\u094d\u0930\u0940"}, {"count": 22, "lang": "hi", "cooccuredTerm": "\u0911\u092b"}, {"count": 22, "lang": "hi", "cooccuredTerm": "\u092e\u093f\u0932\u0915\u0930"}, {"count": 21, "lang": "hi", "cooccuredTerm": "\u092d\u0940"}, {"count": 21, "lang": "hi", "cooccuredTerm": "\u0917\u0930\u094d\u0935"}]}, "\u0623\u0646": {"count": 1189, "lang": "ar", "co_oc": [{"count": 1155, "lang": "ar", "cooccuredTerm": "\u062a\u0631\u0645\u0628"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0644\u062f\u064a\u0647"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u062d\u062a\u0631\u0645"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0648\u0627\u0644\u0645\u0639\u0627\u064a\u064a\u0631"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0648\u062c\u0647"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0631\u0648\u0633\u064a\u0627"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0627\u0644\u0625\u0631\u0627\u062f\u0629"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0623\u0631\u062c\u0648"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u062a\u0643\u0648\u0646"}, {"count": 1128, "lang": "ar", "cooccuredTerm": "\u0642\u064a\u0645\u0646\u0627"}]}, "\u30c8\u30e9\u30f3\u30d7\u6c0f": {"count": 123, "lang": "ja", "co_oc": [{"count": 123, "lang": "ja", "cooccuredTerm": "\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71"}, {"count": 122, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u7dcf\u7d71\u3068\u96fb\u8a71\u4f1a\u8ac7"}, {"count": 97, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u304c\u53f0\u6e7e\u306e\u8521\u82f1\u6587\u7dcf\u7d71\u3068\u96fb\u8a71\u5354\u8b70"}, {"count": 93, "lang": "ja", "cooccuredTerm": "*"}, {"count": 69, "lang": "ja", "cooccuredTerm": "\u3010\u30c8\u30e9\u30f3\u30d7\u6b21\u671f\u5927\u7d71\u9818\u3011\u30c8\u30e9\u30f3\u30d7\u6c0f\u3001\u53f0\u6e7e\u306e\u8521\u7dcf\u7d71\u3068\u7570\u4f8b\u306e\u96fb\u8a71\u5354\u8b70\u3000\uff17\uff19\u5e74\u306e\u7c73\u4e2d\u56fd\u4ea4\u6b63\u5e38\u5316\u5f8c\u521d"}, {"count": 62, "lang": "ja", "cooccuredTerm": "\u7523\u7d4c\u30cb\u30e5\u30fc\u30b9"}, {"count": 56, "lang": "ja", "cooccuredTerm": "@Sankei_news\u3055\u3093\u304b\u3089"}, {"count": 49, "lang": "ja", "cooccuredTerm": "\u30ed\u30a4\u30bf\u30fc"}, {"count": 49, "lang": "ja", "cooccuredTerm": "\u30c8\u30e9\u30f3\u30d7\u6c0f\u304c2\u65e5\u3001\u53f0\u6e7e\u306e\u8521\u82f1\u6587\u7dcf\u7d71\u3068\u96fb\u8a71\u5354\u8b70\u3057\u305f"}, {"count": 49, "lang": "ja", "cooccuredTerm": "\u3056\u3063\u304f\u308a\u8a00\u3046\u3068"}]}, "\u0421\u0428\u0410": {"count": 519, "lang": "ru", "co_oc": [{"count": 425, "lang": "ru", "cooccuredTerm": "\u0414\u043e\u043d\u0430\u043b\u044c\u0434"}, {"count": 399, "lang": "ru", "cooccuredTerm": "\u0422\u0440\u0430\u043c\u043f"}, {"count": 196, "lang": "ru", "cooccuredTerm": "\u0422\u0440\u0430\u043c\u043f:"}, {"count": 171, "lang": "ru", "cooccuredTerm": "\u043f\u0440\u0435\u0437\u0438\u0434\u0435\u043d\u0442"}, {"count": 122, "lang": "ru", "cooccuredTerm": "\u0441\u0432\u0435\u0440\u0433\u0430\u0442\u044c"}, {"count": 118, "lang": "ru", "cooccuredTerm": "\u0440\u0435\u0436\u0438\u043c\u044b"}, {"count": 116, "lang": "ru", "cooccuredTerm": "\u0418\u0437\u0431\u0440\u0430\u043d\u043d\u044b\u0439"}, {"count": 111, "lang": "ru", "cooccuredTerm": "\u0441\u0442\u0440\u0430\u043d\u0430\u0445"}, {"count": 106, "lang": "ru", "cooccuredTerm": "\u043d\u0430\u043c\u0435\u0440\u0435\u043d\u044b"}, {"count": 83, "lang": "ru", "cooccuredTerm": "\u043e\u0442\u043a\u0430\u0436\u0443\u0442\u0441\u044f"}]}, "un": {"count": 445, "lang": "fr", "co_oc": [{"count": 593, "lang": "fr", "cooccuredTerm": "Trump"}, {"count": 477, "lang": "fr", "cooccuredTerm": "une"}, {"count": 191, "lang": "fr", "cooccuredTerm": "pr\u00e9sidente"}, {"count": 184, "lang": "fr", "cooccuredTerm": "Ta\u00efwan"}, {"count": 168, "lang": "fr", "cooccuredTerm": "crise"}, {"count": 166, "lang": "fr", "cooccuredTerm": "Chine"}, {"count": 132, "lang": "fr", "cooccuredTerm": "risque"}, {"count": 125, "lang": "fr", "cooccuredTerm": "Donald"}, {"count": 117, "lang": "fr", "cooccuredTerm": "apr\u00e8s"}, {"count": 104, "lang": "fr", "cooccuredTerm": "via"}]}, "telefoniert": {"count": 230, "lang": "de", "co_oc": [{"count": 224, "lang": "de", "cooccuredTerm": "Trump"}, {"count": 152, "lang": "de", "cooccuredTerm": "Taiwan"}, {"count": 82, "lang": "de", "cooccuredTerm": "China"}, {"count": 79, "lang": "de", "cooccuredTerm": "riskiert"}, {"count": 62, "lang": "de", "cooccuredTerm": "Taiwans"}, {"count": 53, "lang": "de", "cooccuredTerm": "ONLINE"}, {"count": 53, "lang": "de", "cooccuredTerm": "ZEIT"}, {"count": 51, "lang": "de", "cooccuredTerm": "Zorn"}, {"count": 51, "lang": "de", "cooccuredTerm": "Pr\u00e4sidentin"}, {"count": 47, "lang": "de", "cooccuredTerm": "Chinas"}]}, "\u091f\u094d\u0930\u0902\u092a": {"count": 67, "lang": "hi", "co_oc": [{"count": 19, "lang": "hi", "cooccuredTerm": "\u0921\u094b\u0928\u093e\u0932\u094d\u0921"}, {"count": 16, "lang": "hi", "cooccuredTerm": "\u0915\u0928\u094d\u0939\u0948\u092f\u093e"}, {"count": 15, "lang": "hi", "cooccuredTerm": "\u0928\u0930\u0947\u0902\u0926\u094d\u0930"}, {"count": 15, "lang": "hi", "cooccuredTerm": "\u0924\u093e\u0907\u0935\u093e\u0928"}, {"count": 14, "lang": "hi", "cooccuredTerm": "#DonaldTrump"}, {"count": 14, "lang": "hi", "cooccuredTerm": "\u0930\u093e\u0937\u094d\u091f\u094d\u0930\u092a\u0924\u093f"}, {"count": 12, "lang": "hi", "cooccuredTerm": "\u0915\u0941\u092e\u093e\u0930"}, {"count": 11, "lang": "hi", "cooccuredTerm": "\u092c\u0947\u0939\u0924\u0930"}, {"count": 11, "lang": "hi", "cooccuredTerm": "\u091a\u0940\u0928"}, {"count": 11, "lang": "hi", "cooccuredTerm": "\u092e\u094b\u0926\u0940"}]}, "\u091f\u094d\u0930\u092e\u094d\u092a": {"count": 225, "lang": "hi", "co_oc": [{"count": 123, "lang": "hi", "cooccuredTerm": "\u0921\u094b\u0928\u093e\u0932\u094d\u0921"}, {"count": 47, "lang": "hi", "cooccuredTerm": "\u092e\u094b\u0926\u0940"}, {"count": 40, "lang": "hi", "cooccuredTerm": "\u092a\u093e\u0915\u093f\u0938\u094d\u0924\u093e\u0928"}, {"count": 37, "lang": "hi", "cooccuredTerm": "\u092d\u0940"}, {"count": 28, "lang": "hi", "cooccuredTerm": "\u0905\u092e\u0947\u0930\u093f\u0915\u093e"}, {"count": 24, "lang": "hi", "cooccuredTerm": "\u091c\u0940"}, {"count": 23, "lang": "hi", "cooccuredTerm": "\u0911\u092b"}, {"count": 22, "lang": "hi", "cooccuredTerm": "\u0926"}, {"count": 22, "lang": "hi", "cooccuredTerm": "\u0930\u093e\u0937\u094d\u091f\u094d\u0930\u092a\u0924\u093f"}, {"count": 21, "lang": "hi", "cooccuredTerm": "\u092a\u0930\u094d\u0938\u0928"}]}, "Taiw\u00e1n": {"count": 2003, "lang": "es", "co_oc": [{"count": 2282, "lang": "es", "cooccuredTerm": "Trump"}, {"count": 1620, "lang": "es", "cooccuredTerm": "presidenta"}, {"count": 1043, "lang": "es", "cooccuredTerm": "China"}, {"count": 524, "lang": "es", "cooccuredTerm": "conversaci\u00f3n"}, {"count": 509, "lang": "es", "cooccuredTerm": "llamada"}, {"count": 477, "lang": "es", "cooccuredTerm": "di\u00e1logo"}, {"count": 366, "lang": "es", "cooccuredTerm": "\u00bfQu\u00e9"}, {"count": 366, "lang": "es", "cooccuredTerm": "China?"}, {"count": 365, "lang": "es", "cooccuredTerm": "dir\u00e1"}, {"count": 365, "lang": "es", "cooccuredTerm": "inicia"}]}, "#Trump": {"count": 752, "lang": "it", "co_oc": [{"count": 32, "lang": "de", "cooccuredTerm": "#Brexit"}, {"count": 20, "lang": "de", "cooccuredTerm": "#BigData"}, {"count": 19, "lang": "de", "cooccuredTerm": "hat"}, {"count": 19, "lang": "de", "cooccuredTerm": "&amp;"}, {"count": 18, "lang": "de", "cooccuredTerm": "nur"}, {"count": 17, "lang": "de", "cooccuredTerm": "Donald"}, {"count": 14, "lang": "de", "cooccuredTerm": "Wie"}, {"count": 14, "lang": "de", "cooccuredTerm": "Wahl"}, {"count": 14, "lang": "de", "cooccuredTerm": "via"}, {"count": 12, "lang": "de", "cooccuredTerm": "mal"}, {"count": 176, "lang": "it", "cooccuredTerm": "per"}, {"count": 110, "lang": "it", "cooccuredTerm": "non"}, {"count": 87, "lang": "it", "cooccuredTerm": "i"}, {"count": 82, "lang": "it", "cooccuredTerm": "si"}, {"count": 75, "lang": "it", "cooccuredTerm": "gli"}, {"count": 67, "lang": "it", "cooccuredTerm": "#Trump:"}, {"count": 65, "lang": "it", "cooccuredTerm": "#Trump,"}, {"count": 64, "lang": "it", "cooccuredTerm": "come"}, {"count": 63, "lang": "it", "cooccuredTerm": "#Brexit"}, {"count": 60, "lang": "it", "cooccuredTerm": "Trump"}]}, "se": {"count": 1969, "lang": "es", "co_oc": [{"count": 3639, "lang": "es", "cooccuredTerm": "Trump"}, {"count": 768, "lang": "es", "cooccuredTerm": "secretario"}, {"count": 729, "lang": "es", "cooccuredTerm": "Donald"}, {"count": 644, "lang": "es", "cooccuredTerm": "Trump,"}, {"count": 634, "lang": "es", "cooccuredTerm": "no"}, {"count": 598, "lang": "es", "cooccuredTerm": "del"}, {"count": 480, "lang": "es", "cooccuredTerm": "Comercio"}, {"count": 432, "lang": "es", "cooccuredTerm": "clave"}, {"count": 426, "lang": "es", "cooccuredTerm": "El"}, {"count": 426, "lang": "es", "cooccuredTerm": "Seg\u00fan"}]}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      $(document).ready(function(){
+
+
+
+
+        $.each(co_oc, function( index, value ) {
+
+
+          $("#chips").append()
+
+            cnt = value["count"]
+
+            if(cnt > 1000){
+              cnt = Math.floor(cnt / 1000) + "k"
+            }
+
+            $("#chips").append('<span class="mdl-chip ir-chip color" style="background-color:bgcolor;margin-left: 9px;"><span class="mdl-badge" data-badge="count">Inbox</span><span class="mdl-chip__text" style="padding-left: 5px;">title</span></span>'.replace("title",index).replace("count",cnt).replace("bgcolor",color_map[value["lang"]]))
+
+        })
+
+
+
+        $(".mdl-chip__text").click(function() {
+
+            //console.log($(this).html())
+
+            $("#query_field").val($(this).html())
+
+       });
+
+
+
+
+
+
+      // qry , pno, lco
+
+
+      var Gqry = ""
+      var Gpno = ""
+      var Glco = ""
+
+
+      function renderdata(qry, pno, lco){
+
+        Gqry = qry
+        Gpno = pno
+        Glco = lco
+
+
+
+
+        url="http://54.196.186.99:8080/hello?query=qry&pagesize=12&pageno=pno&language=lco"
+
+        url = url.replace("qry", qry).replace("pno", pno).replace("lco", lco)
+
+        console.log(url)
+
+        $.get(url, function(data, status){
+
+
+
+            console.log(Gqry, co_oc[Gqry])
+
+
+
+          if(Gqry in co_oc){
+
+
+            $("#co-occourences").html("")
+
+
+
+
+            $.each(co_oc[Gqry]["co_oc"], function( index, value ) {
+
+                    cnt = value["count"]
+
+                    if(cnt > 1000){
+                      cnt = Math.floor(cnt / 1000) + "k"
+                    }
+
+
+
+
+                    $("#co-occourences").append('<span class="mdl-chip ir-chip color" style="background-color:bgcolor;margin-left: 9px;"><span class="mdl-badge" data-badge="count">Inbox</span><span class="mdl-chip__text" style="padding-left: 5px;">title</span></span>'.replace("title",value["cooccuredTerm"]).replace("count",cnt).replace("bgcolor",color_map[value["lang"]]))
+
+                    
+
+              })
+          }else{
+
+            $("#co-occourences").html("")
+
+          }
+
+
+
+            languages = []
+            count = []
+
+
+            $.each(data["languageData"], function( index, value ) {
+
+              languages.push(index)
+              if(value ==0 )
+                count.push(0)
+              else if(value ==1)
+                count.push(0.1)
+              else
+                count.push(Math.log(value))
+
+            })
+            // Chart start 
+color_array = [
+
+"#2299DD",         
+ "#FF99DD",
+ "#FFE6CC",
+ "#DDCCFF",
+ "#FFCCCC",
+ "#99DDFF", 
+ "#1199DD",
+"#FFFFCC",
+ "#EEFFCC",
+"#00FFD5"
+
+];
+
+
+
+              $(function () {
+                  var chart = Highcharts.chart('container', {
+
+                      title: {
+                          text: 'Click on any column to view results in that language only.'
+                      },
+
+                      xAxis: {
+                          categories: languages
+                      },
+                     yAxis: {
+                                title: {
+                                    text: 'log(#Tweets)'
+                                }
+                            },
+                      series: [{
+                          type: 'column',
+                          colorByPoint: true,
+                          data: count,
+                          colors: color_array,
+                          showInLegend: false
+                      }],
+
+                      plotOptions: {
+                                  series: {
+                                      cursor: 'pointer',
+                                      point: {
+                                          events: {
+                                              click: function() {
+
+                                                  language = this["category"];
+                                                  console.log(Gqry, Gpno, language)
+                                                  renderdata(Gqry, Gpno, language)
+                                                  
+                                              }
+                                          }
+                                      }
+                                  }
+                              }
+
+                  });
+              });
+
+            // Chart end
+
+            // Code for Displaying cards - Start
+
+             $("#cards").html("")
+
+            $.each(data["results"], function( index, value ) {
+
+
+                tweet_id = value["tweet_id"]
+                uid_value = value["user_id"][0]
+
+                card = '<div class="demo-cards mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"><div class="ir_card demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop" style="background-color: bgcolor;"><div class="mdl-card__supporting-text mdl-color-text--grey-600" style="padding-left:10px !important">                 <blockquote class="twitter-tweet"> <a href="https://twitter.com/twuser/status/twid""></a>Loading...</blockquote>                     </div></div><div class="demo-separator mdl-cell--1-col"></div></div>'
+
+                card = card.replace("twid", tweet_id).replace("twuser", uid_value).replace("bgcolor",color_map[value["tweet_lang"][0]])
+
+
+              $("#cards").append(card)
+
+            })
+
+            twttr.widgets.load()
+
+            // Code for Displaying cards - End
+
+
+            // Pagination text
+
+            res_str = "Showing X-Y of Z Results".replace("Z",data["totalcountinfo"]).replace("X",(pno-1)*12+1).replace("Y",(pno-1)*12+12)
+
+            console.log(res_str)
+
+            $("#pagination_text").text(res_str)
+
+            //
+
+        });
+
+
+
+      }
+
+
+      $("#prev_button").click(function() {
+        if(Gpno != 1){
+              renderdata(Gqry, Gpno-1, Glco)
+            }
+       });
+
+
+      $("#next_button").click(function() {
+              renderdata(Gqry, Gpno+1, Glco)
+       });
+
+       $("#search_button").click(function() {
+              console.log("Searching now..")
+              renderdata($("#query_field").val(), 1, "*")
+
+
+       });
+
+
+      $.get("http://localhost:8000/mdl/data/tweets.json?"+q, function(data, status){
+
+          $.each(data["items"], function( index, value ) {
+
+
+
+              card = '<div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing"><div class="ir_card demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop" style="background-color: bgcolor;"><div class="mdl-card__supporting-text mdl-color-text--grey-600">tweet_text</div></div><div class="demo-separator mdl-cell--1-col"></div></div>'
+
+
+              dummy_text = '<blockquote class="twitter-tweet"><p>Currently testing: jQuery and CSS animations: fly-in - <a href="http://t.co/8sFm5wFM" title="http://jsfiddle.net/gabrieleromanato/km3TE/">jsfiddle.net/gabrieleromana…</a> for web apps</p>&mdash; Gabriele Romanato (@gabromanato) <a href="https://twitter.com/gabromanato/status/275673554408837120" data-datetime="2012-12-03T18:51:11+00:00">December 3, 2012</a></blockquote>'
+
+              
+
+
+
+
+              //.replace('bgcolor',color_map[value['lang']])
+          });
+
+          twttr.widgets.load()
+
+        });
+
+
+
+
+    /*
+
+      $.get("http://localhost:8000/mdl/data/landing_page.json", function(data, status){
+
+
+
+          $.each(data["items"], function( index, value ) {
+          
+              $("#chips").append('<span class="mdl-chip ir-chip color" style="background-color:bgcolor;margin-left: 9px;"><span class="mdl-badge" data-badge="count">Inbox</span><span class="mdl-chip__text" style="padding-left: 5px;">title</span></span>'.replace("title",value["title"]).replace("count",value["count"]).replace("bgcolor",color_map[value["lang"]]))
+          });
+
+      });
+
+      */
+
+      });
+
+      
+  </script>
+
+
+  </head>
+  <body>
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+      <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+
+        <div class="mdl-layout__header-row">
+
+          <span class="mdl-layout-title" id="title">
+            
+            
+          </span>
+          <div id="container"></div>
+
+          
+
+          <div class="mdl-layout-spacer"></div>
+        </div>
+        <div class="mdl-layout__header-row" id="co-occourences">
+
+          
+          
+        </div>
+
+
+
+
+      </header>
+      <div class="demo-drawer mdl-layout__drawer">
+        <header class="demo-drawer-header">
+        
+          <form style="">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="query_field">
+              </div>
+              <a class="mdl-button mdl-js-button mdl-button--raised" id="search_button">Search</a>
+              
+              </button>
+              
+          </form>
+        
+        </header>
+        <span style="padding-left:25px;">Trending Words</span>
+        <div id="chips">
+        </div>
+      </div>
+      <main class="mdl-layout__content mdl-color--grey-100">
+      <div class="mdl-grid demo-content" id="cards">
+
+
+      </div>
+
+        <ul class="pagination mdl-layout__content">
+        <li><a id="prev_button" class="active" href="#">&laquo; Prev</a></li>
+        <li> <a id="pagination_text" href="#"> Showing 0-0 of 0 Results </a>  </li>
+        <li><a id="next_button" class="active" href="#">Next &raquo; </a></li>
+      </ul>
+      </main>
+
+    </div>
+    <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+   <!-- <script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+    <script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </body>
+</html>
